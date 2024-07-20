@@ -30,16 +30,17 @@
     </header>
     <h1 class="text-gray-500 font-bold text-[20px]">Add ToDo</h1>
     <!-- Task Form -->
-    <form class="w-10/12 md:w-3/6 shadow-md bg-white rounded-2xl p-4">
+    <form method= "post" class="w-10/12 md:w-3/6 shadow-md bg-white rounded-2xl p-4" >
+      {% csrf_token %}
       <div class="mb-4">
         <label
           class="block text-gray-700 text-sm font-bold mb-2"
-          for="task-name"
+          for="task_name" 
           >Task Name</label
         >
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="task-name"
+          id="task-name" name="title"
           type="text"
           placeholder="Enter task name"
           required
@@ -53,7 +54,7 @@
         >
         <textarea
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="task-description"
+          id="task-description" name="description"
           placeholder="Enter task description"
         ></textarea>
       </div>
@@ -66,7 +67,7 @@
           >
           <input
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="due-date"
+            id="due-date" name="due_date"
             type="date"
             required
           />
@@ -79,17 +80,14 @@
           >
           <input
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="due-time"
+            id="due-time" name="due_time"
             type="time"
             required
           />
         </div>
       </div>
       <div class="flex items-center justify-center">
-        <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="submit"
-        >
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
           Create Task
         </button>
       </div>
