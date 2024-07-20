@@ -4,7 +4,8 @@ from .models import Task
 
 
 def home(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.all().order_by('-id')
+    # added .order_by('-id') to make the order of the fetched task
     return render(request, 'index.html', {
         'tasks' : tasks,
     })
@@ -47,6 +48,17 @@ def add_task(request):
 def delete_task(request):
     return render(request, 'delete.html')
 
-def task_details(request):
-    return render(request, 'task_detail.html')
+def task_details(request, task_id):
+    # on the urls.py i also included the task_id for this to be functional and get the task details
+    task = Task.objects.get(id=task_id)
+    return render(request, 'task_detail.html', {
+        "task":task,
+    })
 
+
+def toggle_complete(request, task_id):
+     task = Task.objects.get(id=task_id)
+     if task:
+         task.completed = not task.completed
+         task.save()
+         return redirect('home')
